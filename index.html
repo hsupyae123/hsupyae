@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head><title>Calculator</title>
+	 <link rel="stylesheet" type="text/css" href="styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+		#container {
+			height:100px;
+			width:device-width;
+			text-align:center;
+			
+			}
+		table {
+			border-collapse:collapse;
+			width:20%;
+			margin-left:35%;
+			}
+		tr,td {
+			border-collapse:collapse;
+			 
+			}
+		.cal { 
+			
+			 width:100px;
+			 height:50px;
+			}
+		#display {
+		     width:100%;
+			 border:none;
+			 outline:none;
+			 text-align:right;
+			height:50px;
+			margin-right:50px;
+			background-color:#ddd;
+			font-size:20px;
+			 
+			
+			}
+		button {
+			outline:none;
+			border:none;
+			background-color:transparent;
+			font-weight:bold;
+			font-family:Myanmar3;
+			 box-shadow: 2px 2px 4px 1px #ccc;
+			
+			}
+			button:hover{
+			  background-color:black; 
+			  color:red;
+			}
+	</style>
+	<script src="main.js"></script>
+	</head>
+	<body>
+			<div id="container">
+				<div id="calculator">
+					<table>
+						<tr>
+							<td colspan="4" style="padding:3px;" >
+								<input type="text" id="display" disabled placeholder="0">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button onclick="clearDisplay()" class="cal">AC</button>
+							</td>
+							<td>
+								<button onclick="del()"class="cal">Del</button>
+							</td>
+							<td>
+								<button onclick="display('%')"class="cal">%</button>
+							</td>
+							<td>
+								<button onclick="display('/')"class="cal">/</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button onclick="appendToDisplay('7')"class="cal">7</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('8')"class="cal">8</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('9')"class="cal">9</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('*')"class="cal">*</button>
+							</td>
+						</tr>
+						<tr>	
+							<td>
+								<button onclick="appendToDisplay('4')"class="cal">4</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('5')"class="cal">5</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('6')"class="cal">6</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('-')"class="cal">-</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button onclick="appendToDisplay('1')"class="cal">1</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('2')"class="cal">2</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('3')"class="cal">3</button>
+							</td>
+							<td>
+								<button onclick="appendToDisplay('+')"class="cal">+</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button onclick="appendToDisplay('.')"class="cal">.</button>
+							</td>
+							<td colspan="2">
+								<button style="width:100%" onclick="appendToDisplay('0')"class="cal">0</button>
+							</td>
+							<td>
+								<button style="width:100%;height:50px;" onclick="calculate()" class="equal"class="cal">=</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		<script>
+		let currentinput="";
+		let display=document.getElementById("display");
+		
+		function appendToDisplay(value){
+		currentinput += value;
+		display.value = currentinput;
+		}
+		
+		function calculate(){
+		try{
+		const result=Function('"use strict";return('+currentinput+')')();
+		display.value=result;
+		currentinput=result;
+		}catch(error){
+		display.value="Error";
+		}
+		}
+		
+		function clearDisplay(){
+		currentinput="";
+		display.value="";
+		}
+	</script>
+	</body>
+</html>
